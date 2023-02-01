@@ -21,8 +21,13 @@
     $response['error'] = false;
     $response['movies'] = $movies;
     $response['message'] = "movies returned successfully";
-
+    $stmt->close();
+    
   }else{
     // we have an error
+    $response['error'] = true;
+    $response['message'] = "could not execute query";
   }
+
+  echo json_encode($response);
 ?>
