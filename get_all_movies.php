@@ -4,7 +4,7 @@
 
   $response = array();
 
-  $stmt = $con->prepare("SELECT * FROM movies");
+  $stmt = $conn->prepare("SELECT * FROM movies");
 
 
   if($stmt->execute()) {
