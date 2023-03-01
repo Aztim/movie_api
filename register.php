@@ -1,5 +1,27 @@
 <?php require "includes/header.php"; ?>
+<?php require "config.php"; ?>
 
+<?php 
+  if(isset($_POST['submit'])) {
+    if($_POST['email'] == '' AND $_POST['username'] == '' OR $_POST['password'] = '') {
+      echo "empty";
+    }  else {
+      
+      $email = $_POST['email'];
+      $email = $_POST['username'];
+      $email = $_POST['password'];
+      
+      $insert = $conn->prepare("INSERT INTO users (email, username, mypassword)
+      VALUES (:email, :username,  :mypassword)");
+
+      $insert->execute([
+        ':email' => $email,
+        ':username' => $username,
+        ':mypassword' => password_hash($password, PASSWORD_DEFAULT),
+      ]);
+    }
+  }
+?>
 
 
 <main class="form-signin w-50 m-auto">
@@ -8,7 +30,7 @@
     <h1 class="h3 mt-5 fw-normal text-center">Please Register</h1>
 
     <div class="form-floating">
-      <input name="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+      <input name="email" type="email" class="form-control" id="floatingInput" placeholder="email">
       <label for="floatingInput">Email address</label>
     </div>
 
@@ -18,7 +40,7 @@
     </div>
 
     <div class="form-floating">
-      <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+      <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="password">
       <label for="floatingPassword">Password</label>
     </div>
 
