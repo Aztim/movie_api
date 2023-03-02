@@ -3,13 +3,13 @@
 
 <?php 
   if(isset($_POST['submit'])) {
-    if($_POST['email'] == '' AND $_POST['username'] == '' OR $_POST['password'] = '') {
+    if($_POST['email'] == '' OR $_POST['username'] == '' OR $_POST['password'] = '') {
       echo "empty";
     }  else {
       
       $email = $_POST['email'];
-      $email = $_POST['username'];
-      $email = $_POST['password'];
+      $username = $_POST['username'];
+      $password = $_POST['password'];
       
       $insert = $conn->prepare("INSERT INTO users (email, username, mypassword)
       VALUES (:email, :username,  :mypassword)");
@@ -32,11 +32,6 @@
     <div class="form-floating">
       <input name="email" type="email" class="form-control" id="floatingInput" placeholder="email">
       <label for="floatingInput">Email address</label>
-    </div>
-
-    <div class="form-floating">
-      <input name="username" type="text" class="form-control" id="floatingInput" placeholder="username">
-      <label for="floatingInput">Username</label>
     </div>
 
     <div class="form-floating">
