@@ -1,3 +1,8 @@
+<?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+?>
+
 <?php require "includes/header.php"; ?>
 
 <?php require "config.php"; ?>
@@ -11,19 +16,21 @@ if(isset($_POST['submit'])) {
       
     } else {
 
+        
+
       $title=$_POST['title']; 
 
-      $body = $_POST['body'];
+      $body =$_POST['body'];
 
-      $username = $_POST['username'];
+      $username =$_SESSION['username'];
 
-      $insert = $conn->prepare("INSERT INTO posts (email, username, mypassword) 
-       VALUES (:email, :username, :mypassword)");
+      $insert = $conn->prepare("INSERT INTO posts(title, body, username) 
+       VALUES (:title, :body, :username )");
 
-       $insert->execute([
-        ':email' => $email,
-        ':username' => $username,
-        ':mypassword' => password_hash($password, PASSWORD_DEFAULT),
+       $insert-> execute([
+        ':title'=> $title,
+        ':body'=> $body,
+        ':username'=> $username,
        ]);
 
     }
@@ -38,13 +45,10 @@ if(isset($_POST['submit'])) {
     <h1 class="h3 mt-5 fw-normal text-center">Create Post</h1>
 
     <div class="form-floating">
-      <input name="email" type="text" class="form-control" id="floatingInput" placeholder="title">
+      <input name="title" type="text" class="form-control" id="floatingInput" placeholder="title">
       <label for="floatingInput">Title</label>
     </div>
 
-    <div class="form-floating">
-      <input name="username" type="hidden" class="form-control" id="floatingInput" placeholder="username">
-    </div>
 
     <div class="form-floating mt-4">
       <textarea name="body" rows="9" placeholder="body" class="form-control" ></textarea>
