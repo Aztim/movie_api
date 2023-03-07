@@ -16,7 +16,7 @@
     //and use the password_verify function
 
 
-    if(isset($_SESSION['username'])) {
+    if(!isset($_SESSION['username'])) {
         header("location: index.php");
     }
 
